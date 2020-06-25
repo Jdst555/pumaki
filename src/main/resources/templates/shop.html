@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
+    <link rel="stylesheet" href="../static/style_shop.css" th:href="@{style_shop.css}">
+    <meta charset="utf-8">
+    <title>Pumaki</title>
+  </head>
+  <body>
+
+
+
+      <header>
+        <div class="logo">
+          <img id ="hummmingbird" src="../static/logo_small.jpg" alt="hummingbird" th:src="@{logo_small.jpg}">
+        </div>
+        <div class="titulo">
+          <p>Pumaki</p>
+        </div>
+        <nav>
+
+          <!--navegacion-->
+          <ul class="lista-navegacion">
+            <li>
+                <a  href="index.html" th:href="@{/}">INICIO</a><ion-icon name="home-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="#">COMPRAR</a><ion-icon name="cart-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="#">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
+            </li>
+
+          </ul>
+
+        </nav>
+      </header>
+
+        <!--Describir este elemento-->
+        <div class="contenido_shop">
+
+
+
+          <!-- caja de producto -->
+          <div class="prod" th:each="prod : ${products}">
+              <img class="img_prod" src="../static/img_prod/naranja.png" alt="producto.jpg" th:src="@{'img_prod/' + ${prod.img}}">
+              <div class="nombre_prod">
+                <h3 th:text="${prod.name}">Naranjas</h3>
+              </div>
+              <div class="precio_prod">
+                <p>USD <span class="precio" th:text="${prod.price}">0</span> / <span class="unidad" th:text="${prod.unit}">Kg</span></p>
+              </div>
+              <div class="btn_prod">
+                <a href="#" class="incremento"><ion-icon name="add-outline"></ion-icon><a/>
+                <a href="#" class="decremento"><ion-icon name="remove-outline"></ion-icon><a/>
+              </div>
+          </div>
+
+
+
+
+        </div>
+
+    <footer></footer>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="../static/shop_script.js" type="text/javascript" th:src="@{shop_script.js}">
+
+    </script>
+  </body>
+</html>

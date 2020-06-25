@@ -1,0 +1,42 @@
+.contenido_shop{
+  border: 2px solid red;
+  padding: 50px 100px;
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-image: url(verduras_edit.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1500px;
+
+}
+
+.btn_prod{
+
+}
+
+.prod{
+  display: flex;
+  flex-direction: column;
+  /*
+  align-items:center;
+  */
+  border: 2px solid black;
+  border-radius: 10px;
+  /*
+  height: 300px;
+  width: 280px;
+
+  align-items:center;
+  justify-content:space-around;
+  */
+
+}
+.precio_prod
+{
+  border: 1px solid magenta;
+}
+.img_prod{
+  border: 1px solid red;
+  width: 85%;
+}

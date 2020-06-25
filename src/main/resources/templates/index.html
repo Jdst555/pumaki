@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
+    <link rel="stylesheet" href="../static/style_index.css" th:href="@{style_index.css}">
+
+    <meta charset="utf-8">
+    <title>Pumaki</title>
+  </head>
+  <body>
+
+
+
+      <header>
+        <div class="logo">
+          <img id ="hummmingbird" src="../static/logo_small.jpg" alt="hummingbird" th:src="@{logo_small.jpg}">
+        </div>
+        <div class="titulo">
+          <p>Pumaki</p>
+        </div>
+        <nav>
+
+          <!--navegacion-->
+          <ul class="lista-navegacion">
+            <li>
+                <a  href="index.html" th:href="@{index}">INICIO</a><ion-icon name="home-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="shop.html" th:href="@{shop}">COMPRAR</a><ion-icon name="cart-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="#">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
+            </li>
+
+          </ul>
+
+        </nav>
+      </header>
+      <!--Describir este elemento-->
+      <div class="centro">
+        <!--Describir este elemento-->
+        <div class="contenido">
+          <div id="top" class="art">
+            <img width="100%" src="../static/banner.png" alt="banner_verduras" th:src="@{banner.png}">
+
+          </div>
+          <div id="left" class="art">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+          </div>
+          <div id="right" class="art">
+            <img width="100%" src="../static/huerto.png" alt="huerto" th:src="@{huerto.png}">
+
+          </div>
+
+        </div>
+        <footer></footer>
+      </div>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  </body>
+</html>
