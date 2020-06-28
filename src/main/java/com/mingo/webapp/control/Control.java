@@ -32,5 +32,13 @@ public class Control {
 		
 		return "shop";
 	}
+	@GetMapping("/products")
+	public String products(Model model) 
+	{
+		List<Product> products = (List<Product>)prodRepo.findAll();
+		model.addAttribute("products", products);
+		return "products";
+		
+	}
 
 }

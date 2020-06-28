@@ -20,7 +20,8 @@ create table if not exists ord
 (
 id bigint not null primary key auto_increment,
 date datetime,
-address varchar(90)
+address varchar(90),
+active boolean
 );
 
 CREATE TABLE IF NOT EXISTS user_ord(

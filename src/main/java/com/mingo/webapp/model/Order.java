@@ -9,18 +9,21 @@ public class Order {
 	private Long id;
 	private Date date;
 	private String address;
-	Map<Product, Integer> products = new HashMap<>();
+	private boolean active;
+	private Map<Product, Integer> products = new HashMap<>();
 	
 	//setters
 	public void setId(Long id) {this.id = id;}
 	public void setDate(Date date) {this.date = date;}
 	public void setAddress(String address) {this.address = address;}
+	public void setActive(boolean state) {this.active = state;}
 	
 	
 	//getters
 	public Long getId() {return id;}
 	public Date getDate() {return date;}
 	public String getAddress() {return address;}
+	public boolean getActive() {return active;}
 	
 	//lista
 	public Integer addProduct(Product product, Integer number) 
@@ -64,6 +67,12 @@ public class Order {
 	public void removeAllOfOne(Product product) 
 	{
 		this.products.remove(product);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("id: %d. date: %s. address: %s. active: %s", id, date, address, active);
 	}
 	
 }
