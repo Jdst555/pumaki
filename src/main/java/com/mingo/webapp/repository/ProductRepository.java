@@ -1,8 +1,10 @@
 package com.mingo.webapp.repository;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Repository;
 
 import com.mingo.webapp.model.Product;
@@ -18,6 +20,7 @@ public class ProductRepository implements IRepository<Product> {
 	public Iterable<Product> findAll() {
 
 		return jdbcTemplate.query("SELECT * FROM product", new ProductMapper());
+		
 	}
 
 	@Override
@@ -29,10 +32,10 @@ public class ProductRepository implements IRepository<Product> {
 	@Override
 	public int save(Product product) {
 		
-		return jdbcTemplate.update("INSERT into product (id, name, unit, price, img) values (?, ?, ?, ?, ?)", product.getId(), product.getName(), product.getUnit(), product.getPrice(), product.getImg());
+		return jdbcTemplate.update("INSERT into product ( name, unit, price, img) values ( ?, ?, ?, ?)", product.getName(), product.getUnit(), product.getPrice(), product.getImg());
 	}
 	
-	//probar si mapea
+
 	class ProductMapper extends BeanPropertyRowMapper<Product>
 	{
 		ProductMapper()

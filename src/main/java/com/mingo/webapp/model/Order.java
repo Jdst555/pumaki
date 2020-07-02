@@ -1,9 +1,11 @@
 package com.mingo.webapp.model;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Order {
 	
 	private Long id;
@@ -12,11 +14,13 @@ public class Order {
 	private boolean active;
 	private Map<Product, Integer> products = new HashMap<>();
 	
+	
+	
 	//setters
 	public void setId(Long id) {this.id = id;}
 	public void setDate(Date date) {this.date = date;}
 	public void setAddress(String address) {this.address = address;}
-	public void setActive(boolean state) {this.active = state;}
+	public void setActive(boolean active) {this.active = active;}
 	
 	
 	//getters
@@ -24,6 +28,8 @@ public class Order {
 	public Date getDate() {return date;}
 	public String getAddress() {return address;}
 	public boolean getActive() {return active;}
+	
+	
 	
 	//lista
 	public Integer addProduct(Product product, Integer number) 

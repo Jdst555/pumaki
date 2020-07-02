@@ -1,5 +1,6 @@
 drop table if exists user_ord;
 drop table if exists ord_product;
+drop table if exists authorities;
 drop table if exists user;
 drop table if exists ord;
 drop table if exists product;
@@ -8,13 +9,21 @@ drop table if exists product;
 CREATE TABLE IF NOT EXISTS user
 (
 id bigint not null primary key auto_increment,
-name varchar(45),
+name varchar(80),
 surname varchar(45),
-email varchar(45),
-password varchar(45)
+username varchar(45) unique,
+email varchar(80) unique,
+password varchar(45),
+enabled boolean default true
 );
 
+create table if not exists authorities 
+(
 
+username varchar(45),
+authority varchar(45)
+);
+alter table authorities add constraint authorities_fk foreign key (username) references user (username) on delete cascade;
 
 create table if not exists ord
 (
@@ -46,6 +55,7 @@ create table if not exists ord_product
 ord_id bigint not null,
 product_id bigint not null
 );
+
 alter table ord_product add constraint ord_product_pk primary key (ord_id, product_id);
 alter table ord_product add constraint ord_product_fk1 foreign key (ord_id) references ord (id) on delete cascade;
 alter table ord_product add constraint ord_product_fk2 foreign key (product_id) references product (id) on delete cascade;

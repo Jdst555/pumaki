@@ -3,10 +3,11 @@ package com.mingo.webapp.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.mingo.webapp.model.User;
 
-
+@Repository
 public class UserRepository implements IRepository<User> {
 	
 	@Autowired
@@ -26,14 +27,15 @@ public class UserRepository implements IRepository<User> {
 
 	@Override
 	public int save(User user) {
-		return jdbcTemplate.update("INSERT into user (id, name, surname, email, password) values (?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getPassword());
+		System.out.println("Usuario a insertar: " + user);
+		return jdbcTemplate.update("INSERT into user (id, name, surname, username, email, password) values (?, ?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getSurname(), user.getUsername(), user.getEmail(), user.getPassword());
 	}
 	
 	class UserMapper extends BeanPropertyRowMapper<User>
 	{
 		UserMapper()
 		{
-			super();
+			super(User.class);
 		}
 	}
 

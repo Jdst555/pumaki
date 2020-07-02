@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Table V04</title>
+	<title>Productos</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css" th:href="@{vendor/animate/animate.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css" th:href="@{vendor/select2/select2.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/perfect-scrollbar/perfect-scrollbar.css" th:href="@{vendor/perfect-scrollbar/perfect-scrollbar.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/util.css" th:href="@{css/util.css}">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="@{css/main.css}">
 <!--===============================================================================================-->
 </head>
 <body>
 <h1 id="titulo_tabla">REGISTRO DE PRODUCTOS</h1>
+<div class="mn_input">
+	<a href="prod_n.html" target="_blank" th:href="@{prod_n}">Nuevo producto</a>
+</div>
+
 	<div class="limiter">
 
 		<div class="container-table100">
@@ -62,18 +66,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
+		</div>
 
 
+
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../static/vendor/jquery/jquery-3.2.1.min.js" th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../static/vendor/bootstrap/js/popper.js" th:src="@{vendor/bootstrap/js/popper.js}"></script>
+	<script src="../static/vendor/bootstrap/js/bootstrap.min.js" th:src="@{vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="../static/vendor/select2/select2.min.js" th:src="@{vendor/select2/select2.min.js}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="../static/vendor/perfect-scrollbar/perfect-scrollbar.min.js" th:src="@{vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
 	<script>
 		$('.js-pscroll').each(function(){
 			var ps = new PerfectScrollbar(this);
@@ -86,7 +92,7 @@
 
 	</script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="../static/js/main.js" th:src="@{js/main.js}"></script>
 
 </body>
 </html>
