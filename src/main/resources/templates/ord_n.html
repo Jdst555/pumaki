@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Nuevo producto</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/prod_n.css" th:href="@{css/prod_n.css}">
+  </head>
+  <body>
+    <div class="mn_form_div">
+        <form class="mn_ord_n_form" action="new_o" method="post" id="form1" th:object="${order}">
+          <label for="address">Direcci'on de entrega:</label>
+          <input type="text" name="address" value=""><br/>
+          <label for="active">Estado:</label>
+          <input type="text" name="active" value=""><br/>
+
+        </form>
+        <button type="submit" name="button1" form="form1">Envíar</button>
+    </div>
+
+  </body>
+</html>

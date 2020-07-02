@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pumaki|Registro</title>
+  </head>
+  <body>
+
+    <h1>Registrarse</h1>
+    <form th:action="@{/register}" method="post" id="regForm" th:object="${reg}">
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" value="username">
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" value="password"><br />
+
+      <label for="confirm">Confirmar el password:</label>
+      <input type="password" name="confirm" value="password(otra vez)"><br />
+
+      <label for="name">Nombre:</label>
+      <input type="text" name="name" value="nombre"><br />
+
+      <label for="surname">Apellido:</label>
+      <input type="text" name="surname" value="apellido"><br />
+
+      <label for="email">Correo electrónico:</label>
+      <input type="text" name="email" value="e-mail"><br />
+
+      <input type="submit" value="Envíar" form="regForm">
+
+
+    </form>
+
+  </body>
+</html>
