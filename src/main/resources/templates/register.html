@@ -3,34 +3,73 @@
   <head>
     <meta charset="utf-8">
     <title>Pumaki|Registro</title>
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
   </head>
+
+
   <body>
+      <header>
+        <div class="logo">
+          <img id ="hummmingbird" src="../static/logo_small.jpg" alt="hummingbird" th:src="@{logo_small.jpg}">
+        </div>
+        <div class="titulo">
+          <p>Pumaki</p>
+        </div>
+        <nav>
+          <!--navegacion-->
+          <ul class="lista-navegacion">
+            <li>
+                <a  href="index.html" th:href="@{index}">INICIO</a><ion-icon name="home-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="shop.html" th:href="@{shop}">COMPRAR</a><ion-icon name="cart-outline"></ion-icon>
+            </li>
+            <li>
+                <a  href="#" th:href="@{register}">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-    <h1>Registrarse</h1>
-    <form th:action="@{/register}" method="post" id="regForm" th:object="${reg}">
-
-      <label for="username">Username:</label>
-      <input type="text" name="username" value="username">
-
-      <label for="password">Password:</label>
-      <input type="password" name="password" value="password"><br />
-
-      <label for="confirm">Confirmar el password:</label>
-      <input type="password" name="confirm" value="password(otra vez)"><br />
-
-      <label for="name">Nombre:</label>
-      <input type="text" name="name" value="nombre"><br />
-
-      <label for="surname">Apellido:</label>
-      <input type="text" name="surname" value="apellido"><br />
-
-      <label for="email">Correo electrónico:</label>
-      <input type="text" name="email" value="e-mail"><br />
-
-      <input type="submit" value="Envíar" form="regForm">
+      <div class="centro">
 
 
-    </form>
 
+          <h1>Registrarse</h1>
+
+        <div id=contenedor_forma_reg>
+          <form th:action="@{/register}" method="post" id="regForm" th:object="${reg}">
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="username">
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="password"><br />
+
+            <label for="confirm">Confirmar el password:</label>
+            <input type="password" name="confirm" value="password(otra vez)"><br />
+
+            <label for="name">Nombre:</label>
+            <input type="text" name="name" value="nombre"><br />
+
+            <label for="surname">Apellido:</label>
+            <input type="text" name="surname" value="apellido"><br />
+
+            <label for="email">Correo electrónico:</label>
+            <input type="text" name="email" value="e-mail"><br />
+
+            <input type="submit" value="Envíar" form="regForm">
+          </div>
+
+
+          </form>
+
+
+
+
+        <footer></footer>
+      </div>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   </body>
+
 </html>

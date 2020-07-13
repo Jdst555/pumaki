@@ -30,9 +30,9 @@ public class ProductRepository implements IRepository<Product> {
 	}
 
 	@Override
-	public int save(Product product) {
+	public void save(Product product) {
 		
-		return jdbcTemplate.update("INSERT into product ( name, unit, price, img) values ( ?, ?, ?, ?)", product.getName(), product.getUnit(), product.getPrice(), product.getImg());
+		jdbcTemplate.update("INSERT into product ( name, unit, price, img) values ( ?, ?, ?, ?)", product.getName(), product.getUnit(), product.getPrice(), product.getImg());
 	}
 	
 

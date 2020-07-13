@@ -22,6 +22,9 @@ header{
   background-color: #3A3B3C;
   height: 80px;
 }
+#contenedor_forma_reg{
+  min-height: 1000px;
+}
 
 .logo{
 

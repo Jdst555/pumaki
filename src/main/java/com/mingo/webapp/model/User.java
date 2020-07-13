@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//clase que representa un usuario
+//clase que representa un usuario cliente o admin
 
 @Entity
 public class User {

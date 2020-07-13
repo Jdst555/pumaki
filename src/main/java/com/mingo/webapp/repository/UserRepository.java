@@ -26,11 +26,15 @@ public class UserRepository implements IRepository<User> {
 	}
 
 	@Override
-	public int save(User user) {
+	public void save(User user) {
 		System.out.println("Usuario a insertar: " + user);
-		return jdbcTemplate.update("INSERT into user (id, name, surname, username, email, password) values (?, ?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getSurname(), user.getUsername(), user.getEmail(), user.getPassword());
+		jdbcTemplate.update("INSERT into user (id, name, surname, username, email, password) values (?, ?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getSurname(), user.getUsername(), user.getEmail(), user.getPassword());
+		jdbcTemplate.update("INSERT into authorities (username, authority) values (?, ?)", user.getUsername(), "ROLE_USER");
 	}
-	
+	public void bSave(User user) 
+	{
+		
+	}
 	class UserMapper extends BeanPropertyRowMapper<User>
 	{
 		UserMapper()

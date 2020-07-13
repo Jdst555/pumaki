@@ -37,34 +37,31 @@
       </header>
 
         <!--Describir este elemento-->
-        <div class="contenido_shop">
-
-
-
+        <div class="contenido_shop" id="cont_shop">
+      
           <!-- caja de producto -->
           <div class="prod" th:each="prod : ${products}">
-              <img class="img_prod" src="../static/img_prod/naranja.png" alt="producto.jpg" th:src="@{'img_prod/' + ${prod.img}}">
-              <div class="nombre_prod">
-                <h3 th:text="${prod.name}">Naranjas</h3>
+
+                <p th:class="nombre" hidden th:text="${prod.name}"></p>
+                <p th:class="precio" hidden th:text="${prod.price}"></p>
+                <p th:class="codigo" hidden th:text="${prod.id}"></p>
+
+              <img th:class="img_prod" src="../static/img_prod/naranja.png" alt="producto.png" th:src="@{'img_prod/' + ${prod.img}}">
+              <div th:class="nombre_prod">
+                <h3 th:class="item" th:text="${prod.name}">Naranjas</h3>
               </div>
-              <div class="precio_prod">
-                <p>USD <span class="precio" th:text="${prod.price}">0</span> / <span class="unidad" th:text="${prod.unit}">Kg</span></p>
+              <div th:class="precio_prod">
+                <p th:class="text_precio">USD <span class="precio" th:text="${prod.price}">0</span> / <span class="unidad" th:text="${prod.unit}">Kg</span></p>
               </div>
-              <div class="btn_prod">
-                <a href="#" class="incremento"><ion-icon name="add-outline"></ion-icon><a/>
-                <a href="#" class="decremento"><ion-icon name="remove-outline"></ion-icon><a/>
+              <div th:class="btn_prod">
+                <a href="#" th:class="incremento"><ion-icon name="add-outline"></ion-icon><a/>
+                <a href="#" th:class="decremento"><ion-icon name="remove-outline"></ion-icon><a/>
               </div>
           </div>
-
-
-
-
         </div>
 
     <footer></footer>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-    <script src="../static/shop_script.js" type="text/javascript" th:src="@{shop_script.js}">
-
-    </script>
   </body>
+    <script src="../static/shop_script.js" type="text/javascript" th:src="@{shop_script.js}"></script>
 </html>

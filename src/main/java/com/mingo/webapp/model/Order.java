@@ -2,6 +2,9 @@ package com.mingo.webapp.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.Entity;
+
 import java.util.Date;
 import org.springframework.stereotype.Component;
 

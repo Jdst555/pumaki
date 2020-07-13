@@ -28,10 +28,10 @@ public class OrderRepository implements IRepository<Order> {
 	}
 
 	@Override
-	public int save(Order order) {
+	public void save(Order order) {
 		
 		order.setDate(new Date());
-		return jdbcTemplate.update("INSERT INTO ord (id, date, address, active) values (?, ?, ?, ?)",
+		jdbcTemplate.update("INSERT INTO ord (id, date, address, active) values (?, ?, ?, ?)",
 				order.getId(), order.getDate(), order.getAddress(), order.getActive());
 	}
 	

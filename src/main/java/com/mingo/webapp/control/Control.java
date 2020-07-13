@@ -1,6 +1,9 @@
 package com.mingo.webapp.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +43,7 @@ public class Control {
 		return "shop";
 	}
 	
-	/**************Mapeo de URLs administrativas*************/
+	/**************Mapeo de URLs administrativas(solo rol ADMIN)*************/
 	
 	
 	//Recupera los productos registrados en la BD y los presenta una tabla
@@ -54,20 +57,22 @@ public class Control {
 	}
 	
 	//Presenta una interface para añadir un nuevo producto a la BD
-	@GetMapping("/prod_n")
-	public String prod_n() 
+	@GetMapping("/nuevo_producto")
+	public String nuevoProducto() 
 	{
-		return "prod_n";
+		return "nuevo_producto";
 	}
 	
 	//Añade un nuevo producto a la BD.
-	@RequestMapping(value= "new_p", method = RequestMethod.POST)
-	public String prod_n(@ModelAttribute Product product) 
+	@RequestMapping(value = "/registrar_nuevo_producto", method = RequestMethod.POST)
+	public String registrarNuevoProducto(@ModelAttribute Product product, Model model) 
 	{
 		
-		System.out.println(product);
+		
 		prodRepo.save(product);
-		return "prod_n";
+		List<Product> products = (List<Product>)prodRepo.findAll();
+		model.addAttribute("products", products);
+		return "products";
 	}
 	
 	//Recupera las órdenes registradas en la BD y las presenta en una tabla
@@ -96,13 +101,23 @@ public class Control {
 	
 	//Añade una nueva órden a la BD
 	@RequestMapping(value= "new_o", method = RequestMethod.POST)
-	public String ord_n(@ModelAttribute Order order) 
+	public String ord_n(@ModelAttribute Order order, Model model) 
 	{
 		
 		System.out.println(order);
 		ordRepo.save(order);
+		List<Order> orders = (List<Order>)ordRepo.findAll();
+		model.addAttribute("orders", orders);
+		return "orders";
+	}
+	@GetMapping("/user")
+	public ResponseEntity<String> user()
+	{
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		String string = principal.toString();
+		return new ResponseEntity<>(string, HttpStatus.OK);
+		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		
-		return "ord_n";
 	}
 
 }

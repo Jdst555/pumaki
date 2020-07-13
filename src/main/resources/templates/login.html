@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ingreso</title>
+  </head>
+  <body>
+
+    <h1>Login</h1>
+    <div th:if="${error}">
+      Error al ingresar. Verifique su username y contraseña.
+    </div>
+    <p>¿Primera vez aqui?</p> Haga click <a th:href="@{/register}">aquí</a>
+
+    <form th:action="@{login}" method="post" id="login_form">
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" value="username"><br />
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" value="password"><br />
+
+      <input type="submit" value="Enviar">
+
+
+    </form>
+  </body>
+</html>

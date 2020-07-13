@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/prod_n.css" th:href="@{css/prod_n.css}">
   </head>
   <body>
+
     <div class="mn_form_div">
         <form class="mn_prod_n_form" action="new_p" method="post" id="form1" th:object="${product}">
           <label for="name">Nombre:</label>
@@ -17,7 +18,7 @@
           <label for="img">Nombre de la imagen</label>
           <input type="text" name="img" value=""><br/>
         </form>
-        <button type="submit" name="button1" form="form1">Envíar</button>
+        <button type="submit" name="button1" form="form1">Enviar</button>
     </div>
 
   </body>

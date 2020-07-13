@@ -7,5 +7,5 @@ public interface IRepository<T> {
 	
 	T findById(Long id);
 	
-	int save(T product);
+	void save(T product);
 }
