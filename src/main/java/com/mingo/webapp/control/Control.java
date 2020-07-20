@@ -42,6 +42,11 @@ public class Control {
 		
 		return "shop";
 	}
+	@GetMapping("/checkout")
+	public String checkout(Model model)
+	{
+		return "checkout";
+	}
 	
 	/**************Mapeo de URLs administrativas(solo rol ADMIN)*************/
 	
@@ -87,9 +92,10 @@ public class Control {
 	//Presenta los detalles de una órden específica
 	@GetMapping("/detail")
 	
-	public void detail(@RequestParam String id) 
+	public String detail(@RequestParam String id, Model model) 
 	{
-		System.out.println("order id es: " + id);
+		
+		return "detail";
 	}
 	
 	//Presenta una interface para añadir manualmente una nueva orden a la BD
@@ -116,7 +122,7 @@ public class Control {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
 		String string = principal.toString();
 		return new ResponseEntity<>(string, HttpStatus.OK);
-		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		
 		
 	}
 

@@ -3,29 +3,46 @@
 
 /*obtiene los botones de incremento presentes en la pagina*/
 let incrementos = document.querySelectorAll('.incremento');
-
+let decrementos = document.querySelectorAll('.decremento');
+let numero = document.getElementById('num');
 /*itemsDesplegados es un array que contiene los objetos Item
-correspondiente a cada item desplegado en la pagina*/
+correspondiente a cada producto desplegado en la pagina*/
 let itemsDesplegados = obtenerItems();
+let total;
 
-
+/*solicitus AJAX. Pide el nombre de este usuario y almacena en localStorage*/
   const Http = new XMLHttpRequest();
   const url = '/user';
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange=(e)=>{localStorage.setItem('user', Http.responseText);}
 
-
+function actualizaCantidad()
+{
+  if(localStorage.getItem('cantidad'))
+  {
+    numero.innerHTML = localStorage.getItem('cantidad');
+  }
+}
 /*agrega un listener de evento a los botones de incremento*/
 for(let i = 0; i < incrementos.length; i++)
 {
   incrementos[i].addEventListener('click', () => {
-    cantidad(itemsDesplegados[i]);
+    aumentarCantidad(itemsDesplegados[i]);
+    actualizaCantidad();
   }, true)
-}
 
+}
+for(let i = 0; i < decrementos.length; i++)
+{
+  decrementos[i].addEventListener('click', () => {
+    disminuirCantidad(itemsDesplegados[i]);
+    actualizaCantidad();
+  }, true)
+
+}
 /*incrementa el contador de items seleccionados y almacena en localStorage*/
-function cantidad(item){
+function aumentarCantidad(item){
 
   let cantidadItems = localStorage.getItem('cantidad');
   cantidadItems = parseInt(cantidadItems);
@@ -35,16 +52,61 @@ function cantidad(item){
   } else{
     localStorage.setItem('cantidad', 1);
   }
-
   registrarItems(item);
+  itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
+  suma();
 }
+function disminuirCantidad(item)
+{
+  let cantidadItems = localStorage.getItem('cantidad');
+  cantidadItems = parseInt(cantidadItems);
+  if(cantidadItems == undefined || cantidadItems == 0 || cantidadItems == undefined)
+  {
+    //no hacer nada
+  }
+  else
+  {
+    localStorage.setItem('cantidad', cantidadItems - 1);
+    eliminarItem(item);
+    itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
+    suma();
+  }
+}
+function suma()
+{
+  console.log('running suma');
+  total = parseInt(localStorage.getItem('total'));
+  if(!total)
+  {
+    total = 0;
+  }
+  total = 0;
+  itemsDesplegados.forEach((item, i) => {
+  total = total + item.cantidadEnCanasta * item.precio;
+  });
+  console.log('valor a guardar en total: ', total);
+  localStorage.setItem('total', total);
+  return total;
 
+}
 /*Aumenta en uno el numero de este item en la canasta y guarda en localStorage*/
 function registrarItems(item)
 {
   item.cantidadEnCanasta = item.cantidadEnCanasta + 1;
   /*usa stringify para convertir a formato JSON*/
   localStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
+}
+function eliminarItem(item)
+{
+  if(item.cantidadEnCanasta == 0)
+  {
+    //no hacer nada
+  }
+  else
+  {
+    item.cantidadEnCanasta = item.cantidadEnCanasta - 1;
+    localStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
+  }
 }
 
 /*obtiene la informacion de todos los items desplegados en la pagina, crea
@@ -95,7 +157,7 @@ function obtenerItems()
 }
 
 
-
+actualizaCantidad();
 /*Objeto que representa un item y en la canasta*/
 function Item(nombre, precio, codigo, cantidadEnCanasta)
 {

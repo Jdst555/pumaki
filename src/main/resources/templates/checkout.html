@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{checkout_style.css}">
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
+    <title>Finalizar</title>
+  </head>
+  <header>
+    <div class="logo">
+      <img id ="hummmingbird" src="../static/logo_small.jpg" alt="hummingbird" th:src="@{logo_small.jpg}">
+    </div>
+    <div class="titulo">
+      <p>Pumaki</p>
+    </div>
+    <nav>
+
+      <!--navegacion-->
+      <ul class="lista-navegacion">
+        <li>
+            <a  href="index.html" th:href="@{/}">INICIO</a><ion-icon name="home-outline"></ion-icon>
+        </li>
+        <li>
+            <a  href="#" th:href="@{shop}">COMPRAR</a><ion-icon name="cart-outline"></ion-icon>
+        </li>
+        <li>
+            <a  href="#" th:href="@{register}">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
+        </li>
+
+      </ul>
+
+    </nav>
+  </header>
+  <body>
+    <div class="cont_products">
+      <div class="header_products">
+        <h5 class="prod">PRODUCTO</h5>
+        <h5 class="price">PRECIO</h5>
+        <h5 class="qty">CANTIDAD</h5>
+        <h5 class="total">TOTAL</h5>
+
+      </div>
+
+    </div>
+  </body>
+  <script type="text/javascript" th:src="@{checkout.js}"></script>
+</html>

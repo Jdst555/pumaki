@@ -8,7 +8,7 @@
   <body>
 
     <div class="mn_form_div">
-        <form class="mn_prod_n_form" action="new_p" method="post" id="form1" th:object="${product}">
+        <form class="mn_prod_n_form" th:action="@{/registrar_nuevo_producto}" method="post" id="form1" th:object="${product}">
           <label for="name">Nombre:</label>
           <input type="text" name="name" value=""><br/>
           <label for="unit">Unidad de medida:</label>

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 //clase que representa un usuario cliente o admin
 
-@Entity
+//@Entity
 public class User {
 	
 	public User(String name, String surname, String username, String password, String email)

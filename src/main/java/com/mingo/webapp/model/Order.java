@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Order {
 	
 	private Long id;

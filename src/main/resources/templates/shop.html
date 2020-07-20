@@ -35,12 +35,16 @@
 
         </nav>
       </header>
+      <div class="sticky">
+        <a href="checkout"><ion-icon name="cart" id="cart"></ion-icon><h3 id="num">0</h3></a>
+      </div>
 
         <!--Describir este elemento-->
         <div class="contenido_shop" id="cont_shop">
-      
+
           <!-- caja de producto -->
-          <div class="prod" th:each="prod : ${products}">
+          <div th:class="prod" th:each="prod : ${products}">
+
 
                 <p th:class="nombre" hidden th:text="${prod.name}"></p>
                 <p th:class="precio" hidden th:text="${prod.price}"></p>
@@ -54,10 +58,10 @@
                 <p th:class="text_precio">USD <span class="precio" th:text="${prod.price}">0</span> / <span class="unidad" th:text="${prod.unit}">Kg</span></p>
               </div>
               <div th:class="btn_prod">
-                <a href="#" th:class="incremento"><ion-icon name="add-outline"></ion-icon><a/>
-                <a href="#" th:class="decremento"><ion-icon name="remove-outline"></ion-icon><a/>
+                <div th:class="incremento" onclick="return false;"><ion-icon name="add-outline" class="btn"></ion-icon></div>
+                <div th:class="decremento" onclick="return false;"><ion-icon name="remove-outline" class="btn"></ion-icon></div>
               </div>
-          </div>
+
         </div>
 
     <footer></footer>
