@@ -13,7 +13,7 @@ name varchar(80),
 surname varchar(45),
 username varchar(45) unique,
 email varchar(80) unique,
-password varchar(45),
+password varchar(100),
 enabled boolean default true
 );
 
@@ -30,7 +30,8 @@ create table if not exists ord
 id bigint not null primary key auto_increment,
 date datetime,
 address varchar(90),
-active boolean
+active boolean,
+total float
 );
 
 CREATE TABLE IF NOT EXISTS user_ord(

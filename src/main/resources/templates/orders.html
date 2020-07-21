@@ -23,9 +23,6 @@
 </head>
 <body>
 <h1 id="titulo_tabla">REGISTRO DE ORDENES</h1>
-<div class="mn_input">
-	<a href="ord_n.html" target="_blank" th:href="@{ord_n}">Nueva orden</a>
-</div>
 	<div class="limiter">
 
 		<div class="container-table100">
@@ -43,6 +40,7 @@
 									<th class="cell100 column2">Fecha de registro</th>
 									<th class="cell100 column3">Dirección de envío</th>
 									<th class="cell100 column4">Estado activo</th>
+									<th class="cell100 column4">Total</th>
 
 								</tr>
 							</thead>
@@ -60,6 +58,7 @@
 									<td class="cell100 column2" th:text="${ord.date}">fecha de registro</td>
 									<td class="cell100 column3" th:text="${ord.address}">dirección de envío</td>
 									<td class="cell100 column4" th:text="${ord.active}">TRUE</td>
+									<td class="cell100 column4" th:text="${ord.total}"></td>
 
 								</tr>
 							</tbody>

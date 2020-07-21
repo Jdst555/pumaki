@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 	PasswordEncoder passEncoder = (PasswordEncoder)new BCryptPasswordEncoder();
+	
 
 	protected void configure(AuthenticationManagerBuilder amb) throws Exception
 	{
@@ -30,9 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.authorizeRequests().antMatchers("/products", "/orders", "/nuevo_producto", "/registrar_nuevo_producto", "/new_o", "/ord_n", "/new_p").hasRole("ADMIN")
-		.antMatchers("/shop", "/checkout").hasAnyRole("USER", "ADMIN")
-		.antMatchers("/", "/**").permitAll().and().formLogin().loginPage("/login");;
+		http.authorizeRequests().antMatchers("/products", "/orders", "/nuevo_producto", "/registrar_nuevo_producto", "/new_o", "/ord_n", "/users").hasRole("ADMIN")
+		.antMatchers("/shop", "/checkout", "/buy").hasAnyRole("USER", "ADMIN")
+		.antMatchers("/", "/**").permitAll().and().formLogin().loginPage("/login");
+		http.csrf().disable();
 	}
 
 }

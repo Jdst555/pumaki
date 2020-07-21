@@ -38,10 +38,26 @@
         <h5 class="price">PRECIO</h5>
         <h5 class="qty">CANTIDAD</h5>
         <h5 class="total">TOTAL</h5>
+      </div>
+      <div class="items">
+
+      </div>
+
+      <div class="cont_commit">
+        <form class="form_buy" action="#" th:action="@{/buy}" method="post" th:object="${order}">
+          <label for="address">Dirección de entrega:</label>
+          <input type="text" name="address" value=""><br/>
+          <input type="text" name="active" value="true" hidden><br/>
+          <input type="text" name="total" value="" class="tot" hidden>
+          <input type="text" name="lista" value=""  class="seleccion"hidden>
+          <input type="submit" name="" value="Comprar">
+
+        </form>
 
       </div>
 
     </div>
   </body>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   <script type="text/javascript" th:src="@{checkout.js}"></script>
 </html>

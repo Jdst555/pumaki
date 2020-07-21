@@ -1,5 +1,7 @@
 package com.mingo.webapp.repository;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,14 +18,22 @@ public class UserRepository implements IRepository<User> {
 	@Override
 	public Iterable<User> findAll() {
 		
-		return jdbcTemplate.query("SELECT * FROM user", new UserMapper());
+		Iterable<User> users =  jdbcTemplate.query("SELECT * FROM user", new UserMapper());
+		return users;
 	}
 
 	@Override
 	public User findById(Long id) {
 		
-		return jdbcTemplate.queryForObject("SELECT * FROM product WHERE id=?", new UserMapper(), id);
+		return jdbcTemplate.queryForObject("SELECT * FROM user WHERE id=?", new UserMapper(), id);
 	}
+	public User findByUsername(String username) {
+		
+		User user;
+		user =  jdbcTemplate.queryForObject("SELECT * FROM user WHERE username=?", new UserMapper(), username);
+		return user;
+	}
+	
 
 	@Override
 	public void save(User user) {

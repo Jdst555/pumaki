@@ -16,7 +16,7 @@ let total;
   Http.open("GET", url);
   Http.send();
   Http.onreadystatechange=(e)=>{localStorage.setItem('user', Http.responseText);}
-
+/*actualiza el contador de items*/
 function actualizaCantidad()
 {
   if(localStorage.getItem('cantidad'))
@@ -58,23 +58,20 @@ function aumentarCantidad(item){
 }
 function disminuirCantidad(item)
 {
+  console.log('disminuirCantidad');
   let cantidadItems = localStorage.getItem('cantidad');
   cantidadItems = parseInt(cantidadItems);
-  if(cantidadItems == undefined || cantidadItems == 0 || cantidadItems == undefined)
+  if(eliminarItem(item))
   {
-    //no hacer nada
+      localStorage.setItem('cantidad', cantidadItems - 1);
+      itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
+      suma();
   }
-  else
-  {
-    localStorage.setItem('cantidad', cantidadItems - 1);
-    eliminarItem(item);
-    itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
-    suma();
-  }
+
 }
+/*axtualiza el total de la cantidad de items*/
 function suma()
 {
-  console.log('running suma');
   total = parseInt(localStorage.getItem('total'));
   if(!total)
   {
@@ -84,6 +81,7 @@ function suma()
   itemsDesplegados.forEach((item, i) => {
   total = total + item.cantidadEnCanasta * item.precio;
   });
+  total = Math.round(total * 100) / 100;
   console.log('valor a guardar en total: ', total);
   localStorage.setItem('total', total);
   return total;
@@ -98,14 +96,16 @@ function registrarItems(item)
 }
 function eliminarItem(item)
 {
+  console.log('eliminarItem');
   if(item.cantidadEnCanasta == 0)
   {
-    //no hacer nada
+    return false;
   }
   else
   {
     item.cantidadEnCanasta = item.cantidadEnCanasta - 1;
     localStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
+    return true;
   }
 }
 
@@ -113,6 +113,12 @@ function eliminarItem(item)
 un objeto para cada uno y los aloja en un array*/
 function obtenerItems()
 {
+  let seleccion = localStorage.getItem('seleccion');
+  if(seleccion)
+  {
+    console.log('si hay algo en localStorage seleccion');
+    return JSON.parse(seleccion);
+  }
   /*lista de items desplegados (objetos)*/
   let listaItems = new Array();
 

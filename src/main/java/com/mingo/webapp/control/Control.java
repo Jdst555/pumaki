@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import com.mingo.webapp.repository.OrderRepository;
 import com.mingo.webapp.repository.ProductRepository;
+import com.mingo.webapp.repository.UserRepository;
 import com.mingo.webapp.model.Order;
 import com.mingo.webapp.model.Product;
+import com.mingo.webapp.model.User;
 
 @Controller
 public class Control {
@@ -27,6 +32,9 @@ public class Control {
 	
 	@Autowired
 	private OrderRepository ordRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@GetMapping(value= {"", "/", "index"})
 	public String home(Model model) 
@@ -46,6 +54,21 @@ public class Control {
 	public String checkout(Model model)
 	{
 		return "checkout";
+	}
+	
+	/*Registra una nueva orden*/
+	@RequestMapping(value = "/buy", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> buy(@ModelAttribute Order order, @RequestParam String lista)
+	{
+		
+		System.out.println(order);
+		System.out.println(lista);
+		
+
+		
+		ordRepo.save(order);
+		return new ResponseEntity<>("OK", HttpStatus.OK);
 	}
 	
 	/**************Mapeo de URLs administrativas(solo rol ADMIN)*************/
@@ -116,14 +139,22 @@ public class Control {
 		model.addAttribute("orders", orders);
 		return "orders";
 	}
+	
 	@GetMapping("/user")
 	public ResponseEntity<String> user()
 	{
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
 		String string = principal.toString();
 		return new ResponseEntity<>(string, HttpStatus.OK);
-		
-		
+	}
+	@GetMapping("/users")
+	public String users(Model model)
+	{
+		User user = userRepo.findByUsername("gali");
+		ArrayList<User> users = new ArrayList<>();
+		users.add(user);
+		model.addAttribute("users", users);
+		return "users";
 	}
 
 }
