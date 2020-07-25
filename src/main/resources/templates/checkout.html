@@ -26,6 +26,11 @@
         <li>
             <a  href="#" th:href="@{register}">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
         </li>
+        <li>
+          <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="Salir">
+          </form>
+        </li>
 
       </ul>
 
@@ -44,18 +49,15 @@
       </div>
 
       <div class="cont_commit">
-        <form class="form_buy" action="#" th:action="@{/buy}" method="post" th:object="${order}">
+        <form class="form_buy" action="#" name="form" onsubmit="return validarForma()" th:action="@{/buy}" method="post" th:object="${order}">
           <label for="address">Dirección de entrega:</label>
           <input type="text" name="address" value=""><br/>
           <input type="text" name="active" value="true" hidden><br/>
           <input type="text" name="total" value="" class="tot" hidden>
-          <input type="text" name="lista" value=""  class="seleccion"hidden>
-          <input type="submit" name="" value="Comprar">
-
+          <input type="text" name="lista" value=""  class="lista"hidden>
+          <input type="submit" name="" value="Finalizar esta compra">
         </form>
-
       </div>
-
     </div>
   </body>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>

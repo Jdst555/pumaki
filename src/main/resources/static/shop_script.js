@@ -1,29 +1,37 @@
 
-/*script de la pagina shop*/
+/*********script de la pagina shop**********/
 
-/*obtiene los botones de incremento presentes en la pagina*/
+/*obtiene los botones de incremento y decremento presentes en la pagina*/
 let incrementos = document.querySelectorAll('.incremento');
 let decrementos = document.querySelectorAll('.decremento');
+
+/**obtener contador de items (carrito) */
 let numero = document.getElementById('num');
+
+
 /*itemsDesplegados es un array que contiene los objetos Item
 correspondiente a cada producto desplegado en la pagina*/
 let itemsDesplegados = obtenerItems();
+
+/**la variable total guarda la suma total de la seleccion */
 let total;
 
-/*solicitus AJAX. Pide el nombre de este usuario y almacena en localStorage*/
+/*solicitus AJAX. Pide el nombre de este usuario y almacena en sessionStorage*/
   const Http = new XMLHttpRequest();
   const url = '/user';
   Http.open("GET", url);
   Http.send();
-  Http.onreadystatechange=(e)=>{localStorage.setItem('user', Http.responseText);}
+  Http.onreadystatechange=(e)=>{sessionStorage.setItem('user', Http.responseText);}
+
 /*actualiza el contador de items*/
 function actualizaCantidad()
 {
-  if(localStorage.getItem('cantidad'))
+  if(sessionStorage.getItem('cantidad'))
   {
-    numero.innerHTML = localStorage.getItem('cantidad');
+    numero.innerHTML = sessionStorage.getItem('cantidad');
   }
 }
+
 /*agrega un listener de evento a los botones de incremento*/
 for(let i = 0; i < incrementos.length; i++)
 {
@@ -31,8 +39,9 @@ for(let i = 0; i < incrementos.length; i++)
     aumentarCantidad(itemsDesplegados[i]);
     actualizaCantidad();
   }, true)
-
 }
+
+/**agrega un listener de evento a los botones de decremento */
 for(let i = 0; i < decrementos.length; i++)
 {
   decrementos[i].addEventListener('click', () => {
@@ -41,38 +50,44 @@ for(let i = 0; i < decrementos.length; i++)
   }, true)
 
 }
-/*incrementa el contador de items seleccionados y almacena en localStorage*/
+
+/*incrementa el numero de items de un producto. Llama a registrarItems() para aumentar la variable cantidadEnCanasta. 
+Llama a sum() para actualizar total.
+*/
 function aumentarCantidad(item){
 
-  let cantidadItems = localStorage.getItem('cantidad');
+  //primero verificar lo que esta almacenado en sessionStorage
+  let cantidadItems = sessionStorage.getItem('cantidad');
   cantidadItems = parseInt(cantidadItems);
   if(cantidadItems)
   {
-      localStorage.setItem('cantidad', cantidadItems + 1);
+      sessionStorage.setItem('cantidad', cantidadItems + 1);
   } else{
-    localStorage.setItem('cantidad', 1);
+    sessionStorage.setItem('cantidad', 1);
   }
   registrarItems(item);
-  itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
+  itemsDesplegados = JSON.parse(sessionStorage.getItem('seleccion'));
   suma();
 }
+
+/**inverso de aumentarCantidad() */
 function disminuirCantidad(item)
 {
   console.log('disminuirCantidad');
-  let cantidadItems = localStorage.getItem('cantidad');
+  let cantidadItems = sessionStorage.getItem('cantidad');
   cantidadItems = parseInt(cantidadItems);
   if(eliminarItem(item))
   {
-      localStorage.setItem('cantidad', cantidadItems - 1);
-      itemsDesplegados = JSON.parse(localStorage.getItem('seleccion'));
+      sessionStorage.setItem('cantidad', cantidadItems - 1);
+      itemsDesplegados = JSON.parse(sessionStorage.getItem('seleccion'));
       suma();
   }
 
 }
-/*axtualiza el total de la cantidad de items*/
+/*actualiza el total de la cantidad de items*/
 function suma()
 {
-  total = parseInt(localStorage.getItem('total'));
+  total = parseInt(sessionStorage.getItem('total'));
   if(!total)
   {
     total = 0;
@@ -83,17 +98,18 @@ function suma()
   });
   total = Math.round(total * 100) / 100;
   console.log('valor a guardar en total: ', total);
-  localStorage.setItem('total', total);
+  sessionStorage.setItem('total', total);
   return total;
 
 }
-/*Aumenta en uno el numero de este item en la canasta y guarda en localStorage*/
+/*Aumenta en uno el numero de este item en la canasta y guarda en sessionStorage*/
 function registrarItems(item)
 {
   item.cantidadEnCanasta = item.cantidadEnCanasta + 1;
   /*usa stringify para convertir a formato JSON*/
-  localStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
+  sessionStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
 }
+
 function eliminarItem(item)
 {
   console.log('eliminarItem');
@@ -104,7 +120,7 @@ function eliminarItem(item)
   else
   {
     item.cantidadEnCanasta = item.cantidadEnCanasta - 1;
-    localStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
+    sessionStorage.setItem('seleccion', JSON.stringify(itemsDesplegados));
     return true;
   }
 }
@@ -113,10 +129,10 @@ function eliminarItem(item)
 un objeto para cada uno y los aloja en un array*/
 function obtenerItems()
 {
-  let seleccion = localStorage.getItem('seleccion');
+  let seleccion = sessionStorage.getItem('seleccion');
   if(seleccion)
   {
-    console.log('si hay algo en localStorage seleccion');
+    console.log('si hay algo en sessionStorage seleccion');
     return JSON.parse(seleccion);
   }
   /*lista de items desplegados (objetos)*/

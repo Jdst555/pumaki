@@ -35,11 +35,11 @@ total float
 );
 
 CREATE TABLE IF NOT EXISTS user_ord(
-user_id bigint not null,
+username varchar(45) not null,
 ord_id bigint not null
 );
-alter table user_ord add constraint user_ord_pk primary key (user_id, ord_id);
-alter table user_ord add constraint user_ord_fk1 foreign key (user_id) references user (id) on delete cascade;
+alter table user_ord add constraint user_ord_pk primary key (username, ord_id);
+alter table user_ord add constraint user_ord_fk1 foreign key (username) references user (username) on delete cascade;
 alter table user_ord add constraint user_ord_fk2 foreign key (ord_id) references ord (id) on delete cascade;
 
 create table if not exists product

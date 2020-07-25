@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Table V04</title>
+	<title>Usuarios</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{detail_style.css}">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:herf="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css" th:href="@{vendor/animate/animate.css}">
 <!--===============================================================================================-->
@@ -20,72 +19,52 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/css/util.css" th:href="@{css/util.css}">
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="@{css/main.css}">
+<!--===============================================================================================-->
 </head>
 <body>
-	<div id="detail_container">
-		<h1 id="titulo_tabla">DETALLES DE ORDEN</h1>
-		<div class="detail_title_element">
-			<h3>ID de la orden:</h3><span>----------</span><h3 th:text="${order.id}"></h3>
-		</div>
-		<div class="detail_title_element">
-			<h3>Fecha de la orden:</h3><span>----------</span><h3 th:text="${order.date}"></h3>
-		</div>
-		<div class="detail_title_element">
-			<h3>Estado de la orden:</h3><span>----------</span><h3 th:text="${order.active}"></h3>
-		</div>
-		
-		<div class="detail_title_element">	
-			<h3>Direccion de entrega:</h3><span>----------</span><h3 th:text="${order.address}"></h3>
-		</div>
-		<div class="detail_title_element">	
-			<h3>Total USD:</h3><span>----------</span><h3 th:text="${order.total}"></h3>
-		</div>
-	</div>
+<h1 id="titulo_tabla">USUARIOS</h1>
+	<div class="limiter">
 
-		<div class="limiter">
+		<div class="container-table100">
 
-			<div class="container-table100">
-
-				<div class="wrap-table100">
+			<div class="wrap-table100">
 
 
 
-					<div class="table100 ver3 m-b-110">
-						<div class="table100-head">
-							<table>
-								<thead>
-									<tr class="row100 head">
-										<th class="cell100 column1">Producto</th>
-										<th class="cell100 column2">ID</th>
-										<th class="cell100 column3">Cantidad</th>
-										<th class="cell100 column4">Valor</th>
+				<div class="table100 ver3 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">ID</th>
+									<th class="cell100 column2">Nombre</th>
+									<th class="cell100 column3">Username</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
 
-									</tr>
-								</thead>
-							</table>
-						</div>
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody th:each="user : ${users}">
+								<tr class="row100 body">
 
-						<div class="table100-body js-pscroll">
-							<table>
-								<tbody th:if="${order}"  th:each="item : ${order.itemList}">
-									<tr class="row100 body">
-										<td class="cell100 column1" th:text="${item.name}">nombre</td>
-										<td class="cell100 column2" th:text="${item.id}">id item</td>
-										<td class="cell100 column3" th:text="${item.amount}">cantidad</td>
-										<td class="cell100 column4" th:text="${item.price}">valor</td>
+									<td class="cell100 column2" th:text="${user.id}"></td>
+									<td class="cell100 column3" th:text="${user.name}"></td>
+									<td class="cell100 column4" th:text="${user.username}"></td>
 
-									</tr>
-								</tbody>
-							</table>
-						</div>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 <!--===============================================================================================-->
-<script src="../static/vendor/jquery/jquery-3.2.1.min.js" th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>
+	<script src="../static/vendor/jquery/jquery-3.2.1.min.js" th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
 	<script src="../static/vendor/bootstrap/js/popper.js" th:src="@{vendor/bootstrap/js/popper.js}"></script>
 	<script src="../static/vendor/bootstrap/js/bootstrap.min.js" th:src="@{vendor/bootstrap/js/bootstrap.min.js}"></script>
@@ -105,7 +84,7 @@
 
 	</script>
 <!--===============================================================================================-->
-	<script src="../static/js/main.js"></script>
+	<script src="../static/js/main.js" th:src="@{js/main.js}"></script>
 
 </body>
 </html>

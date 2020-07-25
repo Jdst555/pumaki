@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.List;
 import com.mingo.webapp.repository.OrderRepository;
 import com.mingo.webapp.repository.ProductRepository;
 import com.mingo.webapp.repository.UserRepository;
+import com.mingo.webapp.service.Generator;
+import com.mingo.webapp.model.Item;
 import com.mingo.webapp.model.Order;
 import com.mingo.webapp.model.Product;
 import com.mingo.webapp.model.User;
@@ -36,12 +42,21 @@ public class Control {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	Generator listGenerator;
+	
+	
+	/*********************MAPEO DE URLS DE USUARIO CLIENTE**********************/
+	
+	/*pagina de inicio*/
 	@GetMapping(value= {"", "/", "index"})
 	public String home(Model model) 
 	{
 		return "index";
 	}
 	
+	
+	/*pagina de compras*/
 	@GetMapping("/shop")
 	public String shop(Model model)
 	{
@@ -50,25 +65,31 @@ public class Control {
 		
 		return "shop";
 	}
+	
+	/*resumen de la compra y total*/
 	@GetMapping("/checkout")
 	public String checkout(Model model)
 	{
 		return "checkout";
 	}
 	
-	/*Registra una nueva orden*/
+	/*Registra una nueva orden. Realiza la compra*/
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> buy(@ModelAttribute Order order, @RequestParam String lista)
+	
+	public String buy(@ModelAttribute Order order, @RequestParam String lista)
 	{
 		
-		System.out.println(order);
-		System.out.println(lista);
-		
-
-		
+		ArrayList<Item> listOfItems = listGenerator.fromJSONtoObject(lista);
+		order.setItemList(listOfItems);
 		ordRepo.save(order);
-		return new ResponseEntity<>("OK", HttpStatus.OK);
+		//attributes.addAttribute("attributeName", "attributeValue");
+		return "redirect:confirmation";
+	}
+	
+	@GetMapping("/confirmation")
+	public String confirmation() 
+	{
+		return "confirmation";
 	}
 	
 	/**************Mapeo de URLs administrativas(solo rol ADMIN)*************/
@@ -114,9 +135,12 @@ public class Control {
 	
 	//Presenta los detalles de una órden específica
 	@GetMapping("/detail")
-	
 	public String detail(@RequestParam String id, Model model) 
 	{
+		Long idLong = Long.parseLong(id);
+		Order order = ordRepo.findById(idLong);
+		System.out.println(order);
+		model.addAttribute("order", order);
 		
 		return "detail";
 	}
@@ -140,6 +164,7 @@ public class Control {
 		return "orders";
 	}
 	
+	/*devuelve el username de este usuario al cliente PRUEBA*/
 	@GetMapping("/user")
 	public ResponseEntity<String> user()
 	{
@@ -147,12 +172,12 @@ public class Control {
 		String string = principal.toString();
 		return new ResponseEntity<>(string, HttpStatus.OK);
 	}
+	
+	/*despliega todos los usuarios registrados*/
 	@GetMapping("/users")
 	public String users(Model model)
 	{
-		User user = userRepo.findByUsername("gali");
-		ArrayList<User> users = new ArrayList<>();
-		users.add(user);
+		Iterable<User> users = userRepo.findAll();
 		model.addAttribute("users", users);
 		return "users";
 	}

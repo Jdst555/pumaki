@@ -1,6 +1,8 @@
 package com.mingo.webapp.repository;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,8 +21,10 @@ public class ProductRepository implements IRepository<Product> {
 	@Override
 	public Iterable<Product> findAll() {
 
-		return jdbcTemplate.query("SELECT * FROM product", new ProductMapper());
 		
+		ArrayList<Product> listProduct =  (ArrayList<Product>)jdbcTemplate.query("SELECT * FROM product", new ProductMapper());
+		//System.out.println("Primer producto de la lista: " + listProduct.get(0));
+		return listProduct;
 	}
 
 	@Override

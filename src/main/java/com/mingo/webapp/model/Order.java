@@ -2,6 +2,7 @@ package com.mingo.webapp.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +14,7 @@ public class Order {
 	private String address;
 	private boolean active;
 	private float total;
-	private Map<Product, Integer> products = new HashMap<>();
-	private Map<?, ?> list = new HashMap<>();
-	
+	private ArrayList<Item> itemList = new ArrayList<>();
 	
 	
 	//setters
@@ -24,7 +23,10 @@ public class Order {
 	public void setAddress(String address) {this.address = address;}
 	public void setActive(boolean active) {this.active = active;}
 	public void setTotal(float total) {this.total =  total;}
-	public  void setList(Map list) {this.list = list;}
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
+	}
+	
 	
 	//getters
 	public Long getId() {return id;}
@@ -32,54 +34,12 @@ public class Order {
 	public String getAddress() {return address;}
 	public boolean getActive() {return active;}
 	public float getTotal() {return total;}
-	public Map getList(){return list;}
-	
-	
-	
-	//lista
-	public Integer addProduct(Product product, Integer number) 
-	{
-		return this.products.put(product, number);
-	} 
-	
-	//
-	public boolean removeOneOfOne(Product product) 
-	{
-		if((this.products.get(product) == null ) || (this.products.get(product) == 0)) 
-		{
-			return false;
-		}
-		else 
-		{
-			int oldNumber = this.products.get(product);
-			int newNumber = oldNumber - 1;
-			this.products.remove(product);
-			this.products.put(product, newNumber);
-			return true;
-		}
+	public ArrayList<Item> getItemList() {
+		return itemList;
 	}
-	public boolean addOneOfOne(Product product) 
-	{
-		if(this.products.get(product) == null) 
-		{
-			this.products.put(product, 1);
-			return true;
-		}
-		else if(this.products.get(product) >= 0) 
-		{
-			int oldNumber = this.products.get(product);
-			int newNumber = oldNumber + 1;
-			this.products.remove(product);
-			this.products.put(product, newNumber);
-			return true;
-		}
-		
-		return false;
-	}
-	public void removeAllOfOne(Product product) 
-	{
-		this.products.remove(product);
-	}
+	
+	
+	
 	
 	@Override
 	public String toString()

@@ -2,27 +2,51 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{ingreso_style.css}">
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
     <title>Ingreso</title>
   </head>
-  <body>
-
-    <h1>Login</h1>
-    <div th:if="${error}">
-      Error al ingresar. Verifique su username y contraseña.
+  <header>
+    <div class="logo">
+      <img id ="hummmingbird" src="../static/logo_small.jpg" alt="hummingbird" th:src="@{logo_small.jpg}">
     </div>
-    <p>¿Primera vez aqui?</p> Haga click <a th:href="@{/register}">aquí</a>
+    <div class="titulo">
+      <p>Pumaki</p>
+    </div>
+    <nav>
 
-    <form th:action="@{login}" method="post" id="login_form">
+      <!--navegacion-->
+      <ul class="lista-navegacion">
+        <li>
+            <a  href="index.html" th:href="@{/}">INICIO</a><ion-icon name="home-outline"></ion-icon>
+        </li>
+        <li>
+            <a  href="#" th:href="@{shop}">COMPRAR</a><ion-icon name="cart-outline"></ion-icon>
+        </li>
+        <li>
+            <a  href="#" th:href="@{register}">REGISTRARSE</a><ion-icon name="body-outline"></ion-icon>
+        </li>
 
-      <label for="username">Username:</label>
-      <input type="text" name="username" value="username"><br />
+      </ul>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" value="password"><br />
+    </nav>
+  </header>
+    <body>
+      <div class="form">
+        <h1>Login</h1>
+        <div th:if="${error}">
+          Error al ingresar. Verifique su username y contraseña.
+        </div>
+        <p>¿Primera vez aqui?</p> <span>Haga click <a th:href="@{/register}">aquí</a></span>
 
-      <input type="submit" value="Enviar">
-
-
-    </form>
-  </body>
+        <form th:action="@{login}" method="post" id="login_form">
+          <label for="username">Username:</label>
+          <input type="text" name="username" value=""><br />
+          <label for="password">Password:</label>
+          <input type="password" name="password" value=""><br />
+          <input type="submit" value="Enviar">
+        </form>
+      </div>
+    </body>
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </html>
