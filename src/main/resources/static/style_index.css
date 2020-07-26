@@ -22,11 +22,7 @@
 }
 
 
-.art{
 
-
-
-}
 .contenido{
   padding: 50px 100px;
   display:grid;
@@ -38,4 +34,16 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 400px 1fr;
 
+}
+#cont_msg
+{
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-image: url(verduras_edit.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1500px;
+  
 }

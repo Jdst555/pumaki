@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	{
 		http.authorizeRequests().antMatchers("/products", "/orders", "/nuevo_producto", "/registrar_nuevo_producto", "/new_o", "/ord_n", "/users").hasRole("ADMIN")
 		.antMatchers("/shop", "/checkout", "/buy").hasAnyRole("USER", "ADMIN")
-		.antMatchers("/", "/**").permitAll().and().formLogin().loginPage("/login");
+		.antMatchers("/", "/**").permitAll().and().formLogin().loginPage("/login").and().logout().logoutSuccessUrl("/");
 		http.csrf().disable();
 	}
 

@@ -123,13 +123,10 @@ public class OrderRepository implements IRepository<Order> {
 
 		@Override
 		public ResultProductAmount mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
-			
-			
 			ResultProductAmount rpa = new ResultProductAmount(rs.getLong(1), rs.getInt(2));
-			
 			return rpa;
-		}}
+			}
+		}
 	class ResultProductAmount
 	{
 		ResultProductAmount(Long prod_id, int amount) 

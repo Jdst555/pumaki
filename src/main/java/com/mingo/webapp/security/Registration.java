@@ -12,7 +12,16 @@ public class Registration {
 	private String surname;
 	private String username;
 	private String email;
+	private String phone;
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -57,7 +66,7 @@ public class Registration {
 	
 	public User toUser(PasswordEncoder passEncoder) 
 	{
-		User user = new User(name, surname, username,  passEncoder.encode(password), email);
+		User user = new User(name, surname, username,  passEncoder.encode(password), email, phone);
 		
 		
 		return user;
